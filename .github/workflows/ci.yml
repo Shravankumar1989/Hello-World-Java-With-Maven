@@ -18,7 +18,7 @@ jobs:
       uses: actions/setup-java@v3
       with:
         java-version: '8'
-        distribution: 'temurin'
+        distribution: 'temurin' # Specify the Java distribution
 
     - name: Cache Maven packages
       uses: actions/cache@v3
@@ -32,10 +32,10 @@ jobs:
       run: mvn -B package --file pom.xml
 
     - name: Run the application
-      run: java -cp target/helloworld-1.0-SNAPSHOT.jar com.example.helloworld.HelloWorld
+      run: java -jar target/helloworld-1.0-SNAPSHOT-shaded.jar
 
     - name: Upload build artifacts
       uses: actions/upload-artifact@v3
       with:
         name: java-app
-        path: target/helloworld-1.0-SNAPSHOT.jar
+        path: target/helloworld-1.0-SNAPSHOT-shaded.jar
