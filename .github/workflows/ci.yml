@@ -42,3 +42,18 @@ jobs:
       with:
         name: java-app
         path: target/helloworld-1.0-SNAPSHOT.jar
+
+    - name: Build Docker image
+      run: docker build -t helloworld-java .
+
+    - name: Save Docker image to artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: helloworld-java
+        path: helloworld-java.tar
+
+    - name: Save Docker image as tar
+      run: docker save -o helloworld-java.tar helloworld-java
+
+    - name: List Docker images
+      run: docker images
